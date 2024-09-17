@@ -1,12 +1,17 @@
 const express = require('express');
 const app = express();
 const jobRoutes = require('./router/jobRouter');
+const scrapeRouter = require('./router/ScrapeRouter');
 const cors = require('cors');
 const db = require('./config/db');
+const axios = require('axios')
+const cheerio = require('cheerio');
+const puppeteer = require('puppeteer')
 
 app.use(cors());
 app.use(express.json());
 app.use('/jobs', require('./router/jobRouter'));
+app.use('/api', scrapeRouter);
 
 app.get('/', (req, res) => {
     res.send("Hello world")
